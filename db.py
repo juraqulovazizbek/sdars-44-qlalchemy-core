@@ -14,7 +14,9 @@ with psycopg2.connect(
 
     cursor.execute("CREATE TABLE IF NOT EXISTS users (id SERIAL PRIMARY KEY, username VARCHAR(127) NOT NULL UNIQUE, password VARCHAR(255));")
     
-    cursor.execute("INSERT INTO users (username, password) VALUES ('ali', '123'), ('vali', '321');")
+    name = input() 
+    password = input() 
+    cursor.execute("INSERT INTO users (username, password) VALUES (%s, %s);", (name, password))
     
     cursor.execute("SELECT * FROM users;")
     users = cursor.fetchall()
